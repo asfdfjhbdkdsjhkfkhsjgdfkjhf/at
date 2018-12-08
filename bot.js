@@ -402,27 +402,24 @@ client.on("message", message => {
               if (message.content.startsWith(prefix + "help")) {
 message.author.send(`**اوامر البوت :
 
-#bc : برودكاست للاونلايت
-#obc : برودكاست للجميع
-#move : سحب عضو من روم
-#role : اعطاء رتبة لشخص معين
-#closeroom : اغلاق الروم الكتابي
-#openeoom : فتح الروم الكتابي
-#kick : طرد عضو معين
-#ban : تبنيد عضو معين 
-#clear : مسح الشات 
-#roles : رتب السيرفر
-#server : معلومات السيرفر 
-#image : عرض صورة شخص ما
-#move all : سحب جميع الاعضاء الى رومك
-#ping : بنق البوت
+!bc : برودكاست للاونلايت
+!obc : برودكاست للجميع
+!move : سحب عضو من روم
+!role : اعطاء رتبة لشخص معين
+!closeroom : اغلاق الروم الكتابي
+!openeoom : فتح الروم الكتابي
+!kick : طرد عضو معين
+!ban : تبنيد عضو معين 
+!clear : مسح الشات 
+!roles : رتب السيرفر
+!server : معلومات السيرفر 
+!image : عرض صورة شخص ما
+!move all : سحب جميع الاعضاء الى رومك
+!ping : بنق البوت
 -----------------------------------------
-#setp : وضع حالة بلاينق للبوت
-#setwt : حالة واتشنق
-#setls : حالة ليستنق
-#setname : اسم البوت 
-#setavatar : تغيير صورة البوت 
-#sett : حالة ستريمنج**`)
+!inv : دعوة البوت لسيرفرك 
+!bot : معلومات البوت 
+سيرفر الدعم : https://discord.gg/asXKGw **`)
 			  }
 			  
 			  });
@@ -459,4 +456,30 @@ if (message.member.voiceChannel == null) return;
  message.channel.send('\`Moved All Voice Members To Your Channel\`').then(m => m.delete(4000))
  }
    });
+   
+client.on('message', message => {
+        if (message.content.toLowerCase() === prefix + "inv") {
+            if(!message.channel.guild) return;
+        let embed = new Discord.RichEmbed()
+        .setTitle(`:small_orange_diamond: Click Here To Invite Planet. `)
+        .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`)
+     message.channel.sendEmbed(embed);
+       }
+   });
+   
+
+
+client.on('message', message => {
+    if (!developers.includes(message.author.id)) return;
+     if (message.content.toLowerCase() === prefix + "bot") {
+message.channel.send(`
+
+__Servers : ${client.guilds.size}__
+__Users : ${client.users.size}__
+__Channels : ${client.channels.size}__
+
+`);
+    }
+});
+
   client.login(process.env.TOKEN);
